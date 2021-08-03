@@ -15,5 +15,7 @@ Route::middleware('auth')->group(function() {
   Route::prefix('dashboard')->group(function() {
     Route::get('/', [AccountController::class, 'index']);
     Route::post('add', [AccountController::class, 'add']);
+    Route::put('/update/{id}', [AccountController::class, 'update']);
+    Route::delete('/delete/{id}', [AccountController::class, 'delete']);
   });
 });

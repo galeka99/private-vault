@@ -10,9 +10,6 @@
   <title>@yield('title') - Private Vault</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('/css/alertify.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('/css/themes/default.min.css') }}">
-  <script type="text/javascript" src="{{ asset('/js/alertify.min.js') }}"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
