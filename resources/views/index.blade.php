@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-signin-client_id"
     content="741909550840-d3j8u1aro5dpr9ivlh7mjtt4r5lsfhd2.apps.googleusercontent.com">
-  <title>Selamat Datang - Private Vault</title>
+  <title>Private Vault</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -67,6 +67,7 @@
       });
     });
   </script>
+  @include('components.alert')
 </body>
 
 </html>

@@ -84,6 +84,6 @@ class UserController extends Controller
         ]);
         $client->revokeToken();
         Auth::logout();
-        return redirect('/');
+        return redirect('/')->with('alert', 'success')->with('message', 'Berhasil keluar');
     }
 }
