@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\User;
 use Google_Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Agent;
 
 class UserController extends Controller
 {
@@ -49,6 +51,26 @@ class UserController extends Controller
 
         $user->save();
         $user->refresh();
+
+        $agent = new Agent();
+        $ip = $request->ip();
+        $device = $agent->device();
+        $platform = $agent->platform() . " " . $agent->version($agent->platform());
+        $browser = $agent->browser() . " " . $agent->version($agent->browser());
+
+        if (Log::where('user_id', '=', $user->id)->count() === 20) {
+            $first_log = Log::where('user_id', '=', $user->id)->orderBy('id')->first();
+            $first_log->delete();
+        }
+        
+        $log = new Log([
+            'user_id' => $user->id,
+            'ip' => $ip,
+            'device' => $device,
+            'platform' => $platform,
+            'browser' => $browser,
+        ]);
+        $log->save();
 
         Auth::login($user, true);
         return redirect('/dashboard');

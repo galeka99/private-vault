@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,6 @@ Route::middleware('auth')->group(function() {
     Route::post('add', [AccountController::class, 'add']);
     Route::put('/update/{id}', [AccountController::class, 'update']);
     Route::delete('/delete/{id}', [AccountController::class, 'delete']);
+    Route::get('/log', [LogController::class, 'index']);
   });
 });

@@ -6,14 +6,19 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Route;
 
 class AccountController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $accounts = Account::where('owner_id', '=', $user->id)->paginate(25);
+        $accounts = null;
+        if ($request->has('q')) {
+            $q = $request->get('q', '');
+            $accounts = Account::where('owner_id', '=', $user->id)->where('title', 'LIKE', "%$q%")->paginate(25);
+        } else {
+            $accounts = Account::where('owner_id', '=', $user->id)->paginate(25);
+        }
         return view('dashboard.index', ['accounts' => $accounts]);
     }
 

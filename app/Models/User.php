@@ -17,6 +17,11 @@ class User extends Model implements Authenticatable
         return $this->hasMany(Account::class, 'owner_id', 'id');
     }
 
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id', 'id');
+    }
+
     public function getAuthIdentifier()
     {
         return $this->{$this->getAuthIdentifierName()};

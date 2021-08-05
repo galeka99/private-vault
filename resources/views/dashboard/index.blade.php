@@ -12,14 +12,20 @@
         <div class="hidden md:flex flex-row gap-x-2">
           <button id="add-button" class="bg-green-600 hover:bg-green-700 text-white rounded px-4 py-2">Tambah
             Baru</button>
+          <a href="{{ url('/dashboard/log') }}"
+            class="bg-purple-600 hover:bg-purple-700 text-white rounded px-4 py-2">Riwayat</a>
           <a href="{{ url('/logout') }}" class="bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2">Keluar</a>
         </div>
       </div>
     </div>
     <hr class="md:hidden">
     <div class="flex flex-row justify-end md:hidden gap-x-2">
-      <button id="add-button" class="bg-green-600 hover:bg-green-700 text-white rounded px-4 py-2">Tambah Baru</button>
-      <a href="{{ url('/logout') }}" class="bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2">Keluar</a>
+      <button id="add-button" class="bg-green-600 hover:bg-green-700 text-white text-center rounded px-4 py-2">Tambah
+        Baru</button>
+      <a href="{{ url('/dashboard/log') }}"
+        class="bg-purple-600 hover:bg-purple-700 text-white text-center rounded px-4 py-2">Riwayat</a>
+      <a href="{{ url('/logout') }}"
+        class="bg-red-600 hover:bg-red-700 text-white text-center rounded px-4 py-2">Keluar</a>
     </div>
   </div>
   <form class="flex flex-row justify-end mb-3" action="{{ url('/dashboard') }}" method="GET">
@@ -28,6 +34,12 @@
       placeholder="Pencarian" value="{{ request()->get('q') }}">
     <button type="submit" class="px-3 py-2 bg-blue-600 text-white rounded-r"><img src="{{ asset('img/search.svg') }}"
         alt="search icon" class="text-white w-4 h-4"></button>
+    @if (request()->has('q'))
+      <a href="{{ url('/dashboard') }}"
+        class="flex flex-col justify-center items-center bg-red-600 hover:bg-red-700 text-white rounded-full px-3 py-2 ml-2">
+        <img src="{{ asset('img/refresh-outline.svg') }}" alt="" width="24" height="24">
+      </a>
+    @endif
   </form>
   <div class="w-full overflow-x-auto pb-3">
     <table class="table-auto w-full text-center divide-y-2 divide-white">
@@ -42,7 +54,12 @@
       <tbody id="account-list" class="bg-blue-50 divide-y-2 divide-white">
         @if ($accounts->total() == 0)
           <tr>
-            <td colspan="6" class="p-2 uppercase text-center">Belum ada akun ditambahkan</td>
+            @if (request()->has('q'))
+              <td colspan="6" class="p-2 uppercase text-center">Tidak ditemukan akun dengan kata kunci
+                '{{ request()->get('q') }}'</td>
+            @else
+              <td colspan="6" class="p-2 uppercase text-center">Belum ada akun ditambahkan</td>
+            @endif
           </tr>
         @else
           @foreach ($accounts as $account)
