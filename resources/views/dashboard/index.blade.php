@@ -28,7 +28,7 @@
         class="bg-red-600 hover:bg-red-700 text-white text-center rounded px-4 py-2">Keluar</a>
     </div>
   </div>
-  <form class="flex flex-row justify-end mb-3" action="{{ url('/dashboard') }}" method="GET">
+  <form class="flex flex-row justify-end mb-3 w-full" action="{{ url('/dashboard') }}" method="GET">
     <input type="text" name="q"
       class="bg-white border-2 border-r-0 border-gray-200 focus:border-blue-600 focus:outline-none w-full lg:w-1/4 rounded-l px-3 py-2"
       placeholder="Pencarian" value="{{ request()->get('q') }}">
@@ -42,7 +42,7 @@
     @endif
   </form>
   <div class="w-full overflow-x-auto pb-3">
-    <table class="table-auto w-full text-center divide-y-2 divide-white">
+    <table class="table-auto w-full text-center divide-y-2 divide-white mb-3">
       <thead class="bg-blue-600 text-white uppercase">
         <tr class="divide-x-2 divide-white">
           <th class="p-2">No</th>
@@ -71,10 +71,14 @@
               <td class="p-2">{{ str_repeat('*', strlen(Crypt::decryptString($account->password))) }}</td>
             </tr>
           @endforeach
+          <tr class="text-sm text-left bg-white text-gray-600">
+            <td class="p-2" colspan="4">Menampilkan {{ $accounts->firstItem() }} - {{ $accounts->lastItem() }} dari total {{ $accounts->total() }} item</td>
+          </tr>
         @endif
       </tbody>
     </table>
   </div>
+  @include('components.paginator', ['datas' => $accounts])
   <div id="add-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10 overflow-y-auto w-screen h-screen">
     <div class="flex flex-col justify-center items-center w-screen min-h-screen p-3">
       <form id="add-form" action="{{ url('/dashboard/add') }}" method="POST"

@@ -12,12 +12,13 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $per_page = 25;
         $accounts = null;
         if ($request->has('q')) {
             $q = $request->get('q', '');
-            $accounts = Account::where('owner_id', '=', $user->id)->where('title', 'LIKE', "%$q%")->paginate(25);
+            $accounts = Account::where('owner_id', '=', $user->id)->where('title', 'LIKE', "%$q%")->paginate($per_page);
         } else {
-            $accounts = Account::where('owner_id', '=', $user->id)->paginate(25);
+            $accounts = Account::where('owner_id', '=', $user->id)->paginate($per_page);
         }
         return view('dashboard.index', ['accounts' => $accounts]);
     }
