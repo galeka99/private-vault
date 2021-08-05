@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <main>
+  <main class="w-screen h-screen overflow-y-auto bg-main">
     <div class="container p-3 mx-auto">
       @yield('content')
     </div>

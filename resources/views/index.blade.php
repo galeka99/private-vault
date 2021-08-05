@@ -13,20 +13,22 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
-<body class="bg-blue-100">
-  <div class="container mx-auto p-3 flex flex-col justify-center items-center min-h-screen">
-    <img src="{{ asset('img/unlock.svg') }}" alt="private vault illustration" class="w-1/2 max-w-sm mb-5">
-    <span class="text-5xl font-bold mb-4 text-blue-800">Private Vault</span>
-    <span class="text-center mb-4">Hilangkanlah kebiasaan mengingat kata sandi dan cobalah untuk menyimpannya menjadi
-      satu</span>
-    <button id="signin_btn"
-      class="group bg-blue-500 hover:bg-blue-600 hover:shadow-md text-white rounded-full shadow flex flex-row items-center"
-      data-onsuccess="postSignIn">
-      <div class="bg-white group-hover:bg-gray-100 rounded-l-full p-3">
-        <img src="{{ asset('img/google.svg') }}" alt="google icon" width="25" height="25">
-      </div>
-      <span class="px-4">Masuk dengan Google</span>
-    </button>
+<body class="bg-main">
+  <div class="w-screen h-screen bg-white bg-opacity-50">
+    <div class="container mx-auto p-3 flex flex-col justify-center items-center min-h-screen">
+      <img src="{{ asset('img/unlock.svg') }}" alt="private vault illustration" class="w-1/2 max-w-sm mb-5">
+      <span class="text-5xl font-bold mb-4 text-blue-800">Private Vault</span>
+      <span class="text-center mb-4">Hilangkanlah kebiasaan mengingat kata sandi dan cobalah untuk menyimpannya menjadi
+        satu</span>
+      <button id="signin_btn"
+        class="group bg-blue-500 hover:bg-blue-600 hover:shadow-md text-white rounded-full shadow flex flex-row items-center"
+        data-onsuccess="postSignIn">
+        <div class="bg-white group-hover:bg-gray-100 rounded-l-full p-3">
+          <img src="{{ asset('img/google.svg') }}" alt="google icon" width="25" height="25">
+        </div>
+        <span class="px-4">Masuk dengan Google</span>
+      </button>
+    </div>
   </div>
   <script>
     function postSignIn(user) {
