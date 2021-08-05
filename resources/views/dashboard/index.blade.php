@@ -46,7 +46,8 @@
           </tr>
         @else
           @foreach ($accounts as $account)
-            <tr class="divide-x-2 divide-white cursor-pointer hover:bg-blue-100" data-id="{{ $account->id }}" data-password="{{ Crypt::decryptString($account->password) }}">
+            <tr class="divide-x-2 divide-white cursor-pointer hover:bg-blue-100" data-id="{{ $account->id }}"
+              data-password="{{ Crypt::decryptString($account->password) }}">
               <td class="p-2">{{ $loop->iteration }}</td>
               <td class="p-2">{{ $account->title }}</td>
               <td class="p-2">{{ $account->username }}</td>
@@ -70,9 +71,17 @@
         <input type="text" name="username"
           class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3 mb-3"
           placeholder="Username" required>
-        <input type="text" name="password"
-          class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3 mb-5"
-          placeholder="Kata Sandi" required>
+        <div class="flex flex-row items-center w-full mb-5">
+          <input type="password" name="password"
+            class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3"
+            placeholder="Kata Sandi" required>
+          <div id="hide-show-password-1" class="py-2 px-4 cursor-pointer">
+            <img id="hidden-password-1" class="" src="{{ asset('img/eye-off-outline.svg') }}" alt="" width="24"
+              height="24">
+            <img id="show-password-1" class="hidden" src="{{ asset('img/eye-outline.svg') }}" alt="" width="24"
+              height="24">
+          </div>
+        </div>
         <button type="submit"
           class="bg-blue-600 hover:bg-blue-700 py-2 px-3 text-white font-semibold rounded w-full mb-2">Tambahkan
           Akun</button>
@@ -95,9 +104,17 @@
           <input type="text" name="username"
             class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3 mb-3"
             placeholder="Username" required>
-          <input type="text" name="password"
-            class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3 mb-5"
-            placeholder="Kata Sandi" required>
+          <div class="flex flex-row items-center w-full mb-5">
+            <input type="password" name="password"
+              class="bg-white border-2 border-gray-200 focus:border-blue-600 focus:outline-none rounded w-full py-2 px-3"
+              placeholder="Kata Sandi" required>
+            <div id="hide-show-password-2" class="py-2 px-4 cursor-pointer">
+              <img id="hidden-password-2" class="" src="{{ asset('img/eye-off-outline.svg') }}" alt="" width="24"
+                height="24">
+              <img id="show-password-2" class="hidden" src="{{ asset('img/eye-outline.svg') }}" alt="" width="24"
+                height="24">
+            </div>
+          </div>
           <button type="submit"
             class="bg-green-600 hover:bg-green-700 py-2 px-3 text-white font-semibold rounded w-full mb-2">Perbarui
             Akun</button>
@@ -131,6 +148,28 @@
 
     document.querySelector('button#close-edit-modal').addEventListener('click', () => {
       editModal.classList.toggle('hidden');
+    });
+
+    document.querySelector('div#hide-show-password-1').addEventListener('click', () => {
+      const input = document.querySelector('form#add-form div input[name="password"]');
+      document.querySelector('img#hidden-password-1').classList.toggle('hidden');
+      document.querySelector('img#show-password-1').classList.toggle('hidden');
+      if (input.getAttribute('type') == 'password') {
+        input.setAttribute('type', 'text');
+      } else {
+        input.setAttribute('type', 'password');
+      }
+    });
+
+    document.querySelector('div#hide-show-password-2').addEventListener('click', () => {
+      const input = document.querySelector('form#edit-form div input[name="password"]');
+      document.querySelector('img#hidden-password-2').classList.toggle('hidden');
+      document.querySelector('img#show-password-2').classList.toggle('hidden');
+      if (input.getAttribute('type') == 'password') {
+        input.setAttribute('type', 'text');
+      } else {
+        input.setAttribute('type', 'password');
+      }
     });
 
     document.querySelectorAll('tbody#account-list tr').forEach(el => {
